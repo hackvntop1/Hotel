@@ -1,0 +1,179 @@
+-- 🟢 Inf Cash + Boats + Secret Doors GUI — by ChatGPT
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- 📌 ScreenGui
+local gui = Instance.new("ScreenGui")
+gui.Name = "InfCashBoatsGUI"
+gui.Parent = game.CoreGui
+
+-- 📌 Nút mở GUI (icon nhỏ)
+local openBtn = Instance.new("TextButton")
+openBtn.Size = UDim2.new(0, 40, 0, 40)
+openBtn.Position = UDim2.new(0, 10, 0.5, -20)
+openBtn.Text = "💰"
+openBtn.TextSize = 20
+openBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+openBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+openBtn.Parent = gui
+openBtn.Active = true
+openBtn.Draggable = true
+
+-- 📌 Frame chính (ẩn lúc đầu)
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 220, 0, 330)
+frame.Position = UDim2.new(0.4, 0, 0.4, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BorderColor3 = Color3.fromRGB(0, 255, 0)
+frame.BorderSizePixel = 2
+frame.Active = true
+frame.Draggable = true
+frame.Visible = false
+frame.Parent = gui
+
+-- 📌 Nút đóng GUI
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 25, 0, 25)
+closeBtn.Position = UDim2.new(1, -27, 0, 2)
+closeBtn.Text = "×"
+closeBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+closeBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+closeBtn.Parent = frame
+
+-- 📌 Label tiêu đề
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -30, 0, 25)
+title.Position = UDim2.new(0, 5, 0, 2)
+title.BackgroundTransparency = 1
+title.Text = "Inf Cash + Boats + Doors"
+title.TextColor3 = Color3.fromRGB(0, 255, 0)
+title.TextSize = 16
+title.Font = Enum.Font.SourceSansBold
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Parent = frame
+
+-- 📌 TextBox nhập số tiền
+local cashBox = Instance.new("TextBox")
+cashBox.Size = UDim2.new(1, -20, 0, 30)
+cashBox.Position = UDim2.new(0, 10, 0, 40)
+cashBox.PlaceholderText = "Nhập số tiền..."
+cashBox.Text = ""
+cashBox.TextColor3 = Color3.fromRGB(0, 255, 0)
+cashBox.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+cashBox.BorderColor3 = Color3.fromRGB(0, 255, 0)
+cashBox.TextSize = 14
+cashBox.Font = Enum.Font.SourceSansBold
+cashBox.Parent = frame
+
+-- 📌 Nút Lấy tiền
+local getBtn = Instance.new("TextButton")
+getBtn.Size = UDim2.new(1, -20, 0, 30)
+getBtn.Position = UDim2.new(0, 10, 0, 80)
+getBtn.Text = "💰 Lấy tiền"
+getBtn.TextColor3 = Color3.fromRGB(0, 255, 0)
+getBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+getBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+getBtn.TextSize = 14
+getBtn.Font = Enum.Font.SourceSansBold
+getBtn.Parent = frame
+
+-- 📌 Nút Lấy Jetski
+local jetskiBtn = Instance.new("TextButton")
+jetskiBtn.Size = UDim2.new(1, -20, 0, 30)
+jetskiBtn.Position = UDim2.new(0, 10, 0, 120)
+jetskiBtn.Text = "🛥️ Lấy tàu nhỏ (Jetski)"
+jetskiBtn.TextColor3 = Color3.fromRGB(0, 255, 0)
+jetskiBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+jetskiBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+jetskiBtn.TextSize = 14
+jetskiBtn.Font = Enum.Font.SourceSansBold
+jetskiBtn.Parent = frame
+
+-- 📌 Nút Lấy tàu vừa (Dinghy)
+local dinghyBtn = Instance.new("TextButton")
+dinghyBtn.Size = UDim2.new(1, -20, 0, 30)
+dinghyBtn.Position = UDim2.new(0, 10, 0, 160)
+dinghyBtn.Text = "🚤 Lấy tàu vừa (Dinghy)"
+dinghyBtn.TextColor3 = Color3.fromRGB(0, 255, 0)
+dinghyBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+dinghyBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+dinghyBtn.TextSize = 14
+dinghyBtn.Font = Enum.Font.SourceSansBold
+dinghyBtn.Parent = frame
+
+-- 📌 Nút Lấy tàu xịn (Transport Boat)
+local transportBtn = Instance.new("TextButton")
+transportBtn.Size = UDim2.new(1, -20, 0, 30)
+transportBtn.Position = UDim2.new(0, 10, 0, 200)
+transportBtn.Text = "🚢 Lấy tàu xịn (Transport Boat)"
+transportBtn.TextColor3 = Color3.fromRGB(0, 255, 0)
+transportBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+transportBtn.BorderColor3 = Color3.fromRGB(0, 255, 0)
+transportBtn.TextSize = 14
+transportBtn.Font = Enum.Font.SourceSansBold
+transportBtn.Parent = frame
+
+-- 🔘 Nút Cửa bí mật 1
+local secretBtn1 = Instance.new("TextButton", frame)
+secretBtn1.Size = UDim2.new(1, -20, 0, 30)
+secretBtn1.Position = UDim2.new(0, 10, 0, 240)
+secretBtn1.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+secretBtn1.BorderColor3 = Color3.fromRGB(0, 255, 0)
+secretBtn1.TextColor3 = Color3.fromRGB(0, 255, 0)
+secretBtn1.Text = "🔑 Cửa bí mật 1"
+secretBtn1.TextSize = 14
+secretBtn1.Font = Enum.Font.SourceSansBold
+secretBtn1.MouseButton1Click:Connect(function()
+    local args = {
+        [1] = workspace:WaitForChild("UpperDoor", 9e9):GetChildren()[3];
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("DoorOpener", 9e9):FireServer(unpack(args))
+end)
+
+-- 🔘 Nút Cửa bí mật 2
+local secretBtn2 = Instance.new("TextButton", frame)
+secretBtn2.Size = UDim2.new(1, -20, 0, 30)
+secretBtn2.Position = UDim2.new(0, 10, 0, 280)
+secretBtn2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+secretBtn2.BorderColor3 = Color3.fromRGB(0, 255, 0)
+secretBtn2.TextColor3 = Color3.fromRGB(0, 255, 0)
+secretBtn2.Text = "🔑 Cửa bí mật 2"
+secretBtn2.TextSize = 14
+secretBtn2.Font = Enum.Font.SourceSansBold
+secretBtn2.MouseButton1Click:Connect(function()
+    local args = {
+        [1] = workspace:WaitForChild("CaveOpening", 9e9):GetChildren()[7];
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("DoorOpener", 9e9):FireServer(unpack(args))
+end)
+
+-- 📌 Sự kiện nút Lấy tiền
+getBtn.MouseButton1Click:Connect(function()
+	local soTien = tonumber(cashBox.Text) or 0
+	local args = { false, soTien, "Cash" }
+	game:GetService("ReplicatedStorage"):WaitForChild("MoneyRequest", 9e9):FireServer(unpack(args))
+end)
+
+-- 📌 Sự kiện nút tàu
+jetskiBtn.MouseButton1Click:Connect(function()
+	game:GetService("ReplicatedStorage"):WaitForChild("BoatSpawner", 9e9):InvokeServer("Jetski")
+end)
+
+dinghyBtn.MouseButton1Click:Connect(function()
+	game:GetService("ReplicatedStorage"):WaitForChild("BoatSpawner", 9e9):InvokeServer("Dinghy")
+end)
+
+transportBtn.MouseButton1Click:Connect(function()
+	game:GetService("ReplicatedStorage"):WaitForChild("BoatSpawner", 9e9):InvokeServer("Transport Boat")
+end)
+
+-- 📌 Mở/đóng GUI
+openBtn.MouseButton1Click:Connect(function()
+	frame.Visible = true
+	openBtn.Visible = false
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+	frame.Visible = false
+	openBtn.Visible = true
+end)
